@@ -13,6 +13,9 @@ items: Array<any>;
 item: any;
 lang:string='en';
 isViewMode:boolean=false;
+isUpdateMode:boolean=false;
+isCreateMode:boolean=false;
+id:string="";
 data :any;
   constructor(
     private router: Router,
@@ -27,10 +30,14 @@ data :any;
    this.data= {
       "SubjectName":{"en":"","ta":""},
       "Image":"",
+      "displayOrder":0,
       "Description":{"en":"","ta":""},
       "CreatedBy":"",
       "CreatedOn":""
    }
+    this.isCreateMode=true;
+    this.isUpdateMode=false;
+    this.isViewMode=false;
    this.getData();
   }
 getData(){  
@@ -41,17 +48,29 @@ getData(){
   }
 
   saveData(){
+    if(this.isCreateMode){
      this.data.CreatedBy='admin';
       this.data.CreatedOn=new Date();
+      this.data.Status='live';
     this.firebaseService.createSubject(this.data)
     .then(
       res => {
        this.resetData();
       }
     )
+    }else{
+       this.data.UpdatedBy='admin';
+      this.data.UpdatedOn=new Date();
+       this.firebaseService.updateSubject(this.id,this.data)
+    .then(
+      res => {
+       this.resetData();
+      }
+    )
+    }
   }
    deleteData(id){
-    this.firebaseService.deleteSubject(id)
+    this.firebaseService.statusUpdateSubject(id,'notlive')
     .then(
       res => {
         this.resetData();
@@ -61,18 +80,24 @@ getData(){
       }
     )
   }
-  viewData(id){
+  viewData(id,modeView){
+
+    if(modeView){
     this.isViewMode=true;
+    this.isUpdateMode=false;
+    this.isCreateMode=false;
+    }else 
+    {
+       this.isViewMode=false;
+       this.isUpdateMode=true;
+       this.isCreateMode=false;
+    }
         this.firebaseService.getSubject(id)
     .subscribe(result => {
- 
       let item = result.payload.data();
-      if (item) {
-         console.log(item.payload.data())
-            console.log(this.data)
-        this.data = item.payload.data();
-    
-        this.data.id = item.payload.id;
+      if (item) {         
+        this.data =item;    
+        this.id = result.payload.id;    
       
       }
     });    

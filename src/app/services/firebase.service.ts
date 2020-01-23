@@ -81,7 +81,8 @@ createSubject(value){
     return this.db.collection('subjects').add(value);
   }
    getSubjects(){
-    return this.db.collection('subjects').snapshotChanges();
+    return this.db.collection('subjects',ref=>ref.where('Status','==','live')).snapshotChanges();
+    //.orderBy('displayOrder')
   }
      getSubject(key){
     return this.db.collection('subjects').doc(key).snapshotChanges();
@@ -92,5 +93,29 @@ createSubject(value){
 
   deleteSubject(Key){
     return this.db.collection('subjects').doc(Key).delete();
+  }
+    statusUpdateSubject(key,status){
+    return this.db.collection('subjects').doc(key).update({"Status":status});
+  }
+
+  createChapter(value){
+    return this.db.collection('chapters').add(value);
+  }
+   getChapters(key){
+    return this.db.collection('chapters',ref=>ref.where('Status','==','live').where('SubjectId','==',key)).snapshotChanges();
+    //.orderBy('displayOrder')
+  }
+     getChapter(key){
+    return this.db.collection('chapters').doc(key).snapshotChanges();
+  }
+   updateChapter(Key, value){
+    return this.db.collection('chapters').doc(Key).set(value);
+  }
+
+  deleteChapter(Key){
+    return this.db.collection('chapters').doc(Key).delete();
+  }
+    statusUpdateChapter(key,status){
+    return this.db.collection('chapters').doc(key).update({"Status":status});
   }
 }

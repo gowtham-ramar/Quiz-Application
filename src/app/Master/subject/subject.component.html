@@ -2,9 +2,11 @@
   <div class="form-group">
     <label for="email">Subject In English:</label>
  <input type="text" class="form-control" [(ngModel)]="data.SubjectName.en" placeholder="Subject In English" [disabled]='isViewMode'> 
+ 
      <label for="email">Subject In Tamil:</label>
  <input type="text" class="form-control" [(ngModel)]="data.SubjectName.ta" placeholder="Subject In Tamil" [disabled]='isViewMode'> 
-
+    <label for="email">Display Order:</label>
+ <input type="text" class="form-control" [(ngModel)]="data.displayOrder" placeholder="Display order" [disabled]='isViewMode'> 
     <label for="email">Description In English:</label>
  <textarea class="form-control" [(ngModel)]="data.Description.en" [disabled]='isViewMode'> 
  </textarea>
@@ -14,13 +16,15 @@
   </div>
 
 
-<button (click)="saveData()"  class="btn btn-primary">Save</button>
+<button (click)="saveData()"  class="btn btn-primary" *ngIf="isCreateMode">Save</button>
+<button (click)="saveData()"  class="btn btn-primary" *ngIf="isUpdateMode">Update</button>
+<button (click)="resetData()"  class="btn btn-primary">Reset</button>
 <br>
  <div *ngFor="let item of items;let i = index" class="list-group-item list-group-item-action flex-column align-items-start">
- <button mat-raised-button class="delete-button" color="warn" type="button"  class="btn btn-warning" (click)="delete(item.payload.doc.id)">Delete</button>
+ <button mat-raised-button class="delete-button" color="warn" type="button"  class="btn btn-warning" (click)="deleteData(item.payload.doc.id)">Delete</button>
 
-<button mat-raised-button class="delete-button" color="warn" type="button"  class="btn btn-success" (click)="viewData(item.payload.doc.id)">View</button>
-<button mat-raised-button class="delete-button" color="warn" type="button"  class="btn btn-info" (click)="EditData(item.payload.doc.id)">Edit</button> <br>
+<button mat-raised-button class="delete-button" color="warn" type="button"  class="btn btn-success" (click)="viewData(item.payload.doc.id,true)">View</button>
+<button mat-raised-button class="delete-button" color="warn" type="button"  class="btn btn-info" (click)="viewData(item.payload.doc.id,false)">Edit</button> <br>
  {{item.payload.doc.data().SubjectName[lang]}}
  <br/>
 
