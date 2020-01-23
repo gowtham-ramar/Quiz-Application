@@ -14,7 +14,7 @@
 </select>
 
 
-<div *ngFor="let questions of data">
+<div *ngFor="let questions of data;let i = index">
   <div class="form-group">
     <label for="email">Question In English:</label>
  <input type="text" class="form-control" [(ngModel)]="questions.QuestionTitle.en" placeholder="Question In English"> 
@@ -24,31 +24,52 @@
 <input type="text" class="form-control" [(ngModel)]="questions.QuestionTitle.ta"
 placeholder="Question In Tamil">
   </div>
-<input type="text" [(ngModel)]="questions.Mark" style="display:none">
+      <label for="email">Mark:</label>
+<input type="text" [(ngModel)]="questions.Mark"class="form-control"  >
+     <label for="email">Seconds:</label>
+<input type="text" [(ngModel)]="questions.TimeToAnswerInSec" class="form-control" >
 
-<input type="text" [(ngModel)]="questions.TimeToAnswerInSec" style="display:none">
-<input type="text" [(ngModel)]="questions.Level" style="display:none">
-<input type="text" [(ngModel)]="questions.Subject" style="display:none">
-<input type="text" [(ngModel)]="questions.Chapter" style="display:none">
-<input type="text" [(ngModel)]="questions.QuestionType" style="display:none">
-<div *ngFor="let item of questions.Options;let i = index">
-   {{i+1}}) <input type="text" class="form-control" [(ngModel)]="item.OptionsTitle.en" placeholder="Options In English"> <br>
+     <label for="email">Question Level:</label>
+   <select  [(ngModel)]="questions.Level" class="form-control" >
+  <option value="easy">Easy</option>
+  <option value="medium">Medium</option>
+  <option value="hard">Hard</option>
+  
+</select>
+
+  <label for="email">Question Type:</label>
+   <select  [(ngModel)]="questions.QuestionType" class="form-control" >
+  <option value="single">Single</option>
+
+  
+</select>
+
+<div *ngFor="let item of questions.Options;let j = index">
+   {{j+1}}) <input type="text" class="form-control" [(ngModel)]="item.OptionsTitle.en" placeholder="Options In English"> <br>
       <input type="text"  class="form-control" [(ngModel)] ="item.OptionsTitle.ta"placeholder="Options In Tamil" >
 <br>
-      <input type="radio"  [(ngModel)]="questions.IsCorrect" name="correct" [value]="i"/>isCorrect Answer
+      <input type="radio"  [(ngModel)]="questions.IsCorrect" name="correct{{i}}" [value]="j"/>isCorrect Answer
 
 </div>
- <button (click)="addOptions()" class="btn btn-success"> add options</button>
-
+ <button (click)="addOptions(i)" class="btn btn-success"> add options</button>
+<div class="form-group">
+    <label for="email">Explantion In English:</label>
+ <input type="text" class="form-control" [(ngModel)]="questions.Explantion.en" placeholder="Explantion In English"> 
+  </div>
+  <div class="form-group">
+    <label for="pwd">Explantion In Tamil:</label>
+<input type="text" class="form-control" [(ngModel)]="questions.Explantion.ta"
+placeholder="Explantion In Tamil">
+  </div>
 
 </div>
 <br>
 <button (click)="addQuestions()"  class="btn btn-primary">Add Question</button>
-<button (click)="save()"  class="btn btn-primary">Save</button>
+<button (click)="saveQuestions(0)"  class="btn btn-primary">Save</button>
 <br>
 <br>
 
-
+ 
 
 Choose Language:
 <select class="form-control" [(ngModel)]="lang" >
@@ -59,7 +80,9 @@ Choose Language:
 Question List
  <div *ngFor="let item of items;let i = index" class="list-group-item list-group-item-action flex-column align-items-start">
  <button mat-raised-button class="delete-button" color="warn" type="button"  class="btn btn-warning" (click)="delete(item.payload.doc.id)">Delete</button><button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal" (click)="addComments(item.payload.doc.id)">Comments</button>
- <br/>
+<button type="button" class="btn btn-info "  (click)="getQuestion(item.payload.doc.id,false)">Edit</button>
+<button type="button" class="btn btn-info " (click)="getQuestion(item.payload.doc.id,true)">View</button>
+ <br/> 
   <!-- {{|json}} -->
  <div> {{i+1}}){{item.payload.doc.data().QuestionTitle[lang]}}</div>
  <div *ngFor="let option of item.payload.doc.data().Options;let j = index" class="list-group-item list-group-item-action flex-column align-items-start">

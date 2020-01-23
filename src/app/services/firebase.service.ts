@@ -52,8 +52,11 @@ export class FirebaseService {
   createQuestion(value){
     return this.db.collection('questions').add(value);
   }
-   getQuestion(value){
+   getQuestions(value){
     return this.db.collection('questions').snapshotChanges();
+  }
+    getQuestion(key){
+    return this.db.collection('questions').doc(key).snapshotChanges();
   }
    updateQuestion(Key, value){
     return this.db.collection('questions').doc(Key).set(value);
