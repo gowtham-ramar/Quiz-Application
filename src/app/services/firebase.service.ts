@@ -118,4 +118,26 @@ createSubject(value){
     statusUpdateChapter(key,status){
     return this.db.collection('chapters').doc(key).update({"Status":status});
   }
+
+  createClass(value){
+    return this.db.collection('classes').add(value);
+  }
+   getClasss(){
+    return this.db.collection('classes',ref=>ref.where('Status','==','live')).snapshotChanges();
+    //.orderBy('displayOrder')
+  }
+     getClass(key){
+    return this.db.collection('classes').doc(key).snapshotChanges();
+  }
+   updateClass(Key, value){
+    return this.db.collection('classes').doc(Key).set(value);
+  }
+
+  deleteClass(Key){
+    return this.db.collection('classes').doc(Key).delete();
+  }
+    statusUpdateClass(key,status){
+    return this.db.collection('classes').doc(key).update({"Status":status});
+  }
+
 }
