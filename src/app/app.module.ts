@@ -20,6 +20,9 @@ import { FirebaseService } from './services/firebase.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatInputModule, MatSliderModule, MatDialogModule } from '@angular/material';
 import { QuestionsComponent } from './questions/questions.component';
+import { SubjectComponent } from './Master/subject/subject.component';
+import { ChapterComponent } from './Master/chapter/chapter.component';
+import { ClassComponent } from './Master/class/class.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { QuestionsComponent } from './questions/questions.component';
     EditUserComponent,
     NewUserComponent,
     HomeComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    SubjectComponent,
+    ChapterComponent,
+    ClassComponent
   ],
   entryComponents: [AvatarDialogComponent],
   imports: [
