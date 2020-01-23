@@ -1,0 +1,80 @@
+<div>
+  <div class="form-group">
+    <label for="email">Question In English:</label>
+ <input type="text" class="form-control" [(ngModel)]="questions.QuestionTitle.en" placeholder="Question In English"> 
+  </div>
+  <div class="form-group">
+    <label for="pwd">Question In Tamil:</label>
+<input type="text" class="form-control" [(ngModel)]="questions.QuestionTitle.ta"
+placeholder="Question In Tamil">
+  </div>
+<input type="text" [(ngModel)]="questions.Mark" style="display:none">
+
+<input type="text" [(ngModel)]="questions.TimeToAnswerInSec" style="display:none">
+<input type="text" [(ngModel)]="questions.Level" style="display:none">
+<input type="text" [(ngModel)]="questions.Subject" style="display:none">
+<input type="text" [(ngModel)]="questions.Chapter" style="display:none">
+<input type="text" [(ngModel)]="questions.QuestionType" style="display:none">
+<div *ngFor="let item of questions.Options;let i = index">
+   {{i+1}}) <input type="text" class="form-control" [(ngModel)]="item.OptionsTitle.en" placeholder="Options In English"> <br>
+      <input type="text"  class="form-control" [(ngModel)] ="item.OptionsTitle.ta"placeholder="Options In Tamil" >
+<br>
+      <input type="radio"  [(ngModel)]="questions.IsCorrect" name="correct" [value]="i"/>isCorrect Answer
+
+</div>
+ <button (click)="addOptions()" class="btn btn-success"> add options</button>
+<button (click)="save()"  class="btn btn-primary">Save</button>
+</div>
+
+<br>
+<br>
+
+
+
+Choose Language:
+<select class="form-control" [(ngModel)]="lang" >
+  <option value="en">Eng</option>
+   <option value="ta">Tam</option>
+</select>
+<br>
+Question List
+ <div *ngFor="let item of items;let i = index" class="list-group-item list-group-item-action flex-column align-items-start">
+ <button mat-raised-button class="delete-button" color="warn" type="button"  class="btn btn-warning" (click)="delete(item.payload.doc.id)">Delete</button><button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal" (click)="addComments(item.payload.doc.id)">Comments</button>
+ <br/>
+  <!-- {{|json}} -->
+ <div> {{i+1}}){{item.payload.doc.data().QuestionTitle[lang]}}</div>
+ <div *ngFor="let option of item.payload.doc.data().Options;let j = index" class="list-group-item list-group-item-action flex-column align-items-start">
+{{j+1}})<input type="radio" name="{{'UserAnswer'+i}}" [value]="j"/> 
+<div>
+{{option.OptionsTitle[lang]}}
+ </div>
+
+ </div>
+  
+ Correct Answer : {{ item.payload.doc.data().Options[item.payload.doc.data().IsCorrect].OptionsTitle[lang]}}
+ </div>
+ <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+
+        
+        <div class="modal-body">
+ <textarea class="form-control" [(ngModel)]="quizComments" placeholder="Comment here"></textarea> 
+  <div *ngFor="let item of comments;let i = index" class="list-group-item list-group-item-action flex-column align-items-start">
+    <pre>{{item.payload.doc.data().user}} => {{item.payload.doc.data().comment}}</pre>
+ </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"(click)="saveComments()" >Save</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
