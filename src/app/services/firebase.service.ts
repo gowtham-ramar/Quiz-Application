@@ -80,8 +80,11 @@ export class FirebaseService {
 createSubject(value){
     return this.db.collection('subjects').add(value);
   }
-   getSubject(value){
+   getSubjects(){
     return this.db.collection('subjects').snapshotChanges();
+  }
+     getSubject(key){
+    return this.db.collection('subjects').doc(key).snapshotChanges();
   }
    updateSubject(Key, value){
     return this.db.collection('subjects').doc(Key).set(value);
@@ -89,31 +92,5 @@ createSubject(value){
 
   deleteSubject(Key){
     return this.db.collection('subjects').doc(Key).delete();
-  }
-createChapter(value){
-    return this.db.collection('chapters').add(value);
-  }
-   getChapter(value){
-    return this.db.collection('chapters').snapshotChanges();
-  }
-   updateChapter(Key, value){
-    return this.db.collection('chapters').doc(Key).set(value);
-  }
-
-  deleteChapter(Key){
-    return this.db.collection('chapters').doc(Key).delete();
-  }
-  createClass(value){
-    return this.db.collection('classes').add(value);
-  }
-   getClass(value){
-    return this.db.collection('classes').snapshotChanges();
-  }
-   updateClass(Key, value){
-    return this.db.collection('classes').doc(Key).set(value);
-  }
-
-  deleteClass(Key){
-    return this.db.collection('classes').doc(Key).delete();
   }
 }
