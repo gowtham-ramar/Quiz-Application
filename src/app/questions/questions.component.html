@@ -1,4 +1,20 @@
-<div>
+   <select  (change)="getChapter()" [(ngModel)]="SubjectId" [disabled]="isCreateMode || isUpdateMode || isViewMode">
+  <option value="">Select Subject</option>
+  <option *ngFor="let item of subjects" value="{{item.payload.doc.id}}">{{item.payload.doc.data().SubjectName[lang]}}</option>
+</select>
+
+   <select  (change)="getData()" [(ngModel)]="ChapterId" [disabled]="isCreateMode || isUpdateMode || isViewMode">
+  <option value="">Select Chapter</option>
+  <option *ngFor="let item of chapters" value="{{item.payload.doc.id}}">{{item.payload.doc.data().ChapterName[lang]}}</option>
+</select>
+
+   <select  [(ngModel)]="ClassId" [disabled]="isCreateMode || isUpdateMode || isViewMode">
+  <option value="">Select Class</option>
+  <option *ngFor="let item of classes" value="{{item.payload.doc.id}}">{{item.payload.doc.data().ClassName[lang]}}</option>
+</select>
+
+
+<div *ngFor="let questions of data">
   <div class="form-group">
     <label for="email">Question In English:</label>
  <input type="text" class="form-control" [(ngModel)]="questions.QuestionTitle.en" placeholder="Question In English"> 
@@ -23,9 +39,12 @@ placeholder="Question In Tamil">
 
 </div>
  <button (click)="addOptions()" class="btn btn-success"> add options</button>
-<button (click)="save()"  class="btn btn-primary">Save</button>
-</div>
 
+
+</div>
+<br>
+<button (click)="addQuestions()"  class="btn btn-primary">Add Question</button>
+<button (click)="save()"  class="btn btn-primary">Save</button>
 <br>
 <br>
 

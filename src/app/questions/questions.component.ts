@@ -15,7 +15,12 @@ items: Array<any>;
 comments: Array<any>;
 userAnswer:any[];
 lang:string='en';
+data: Array<any>;
 isSubmit=true;
+ClassId:string="";ChapterId:string="";SubjectId:string="";
+isViewMode:boolean=false;
+isUpdateMode:boolean=false;
+isCreateMode:boolean=false;
 questions :any;
   constructor(
     private fb: FormBuilder,
@@ -26,29 +31,36 @@ questions :any;
   }
 
  ngOnInit() {
-    this.createForm();
-    this.getData();
+
+   
   }
-  addOptions(){
-    this.questions.Options.push({
+  addOptions(idx){
+    this.questions[idx].Options.push({
         "OptionsTitle":{"en":"","ta":""}
       });
   }
 
-  createForm() {
+  addQuestions() {
+this.isCreateMode=true;
   this.questions= {
       "QuestionTitle":{"en":"","ta":""},
-      "Mark":1.5,
+      "Mark":1,
       "TimeToAnswerInSec":60,
-      "Level":"easy",
-      "Subject":"tamil",
-      "QuestionType":"single",
-      "Chapter":"thirukural",
+      "Level":"",
+      "SubjectId":this.SubjectId,
+      "ChapterId":this.SubjectId,
+      "ClassId":this.ClassId,
+      "QuestionType":"",
+      "Status":"live",    
       "IsCorrect":0,
       "Options":[{
         "OptionsTitle":{"en":"","ta":""}
-      }]
+      }],
+      "CreatedBy":"",
+      "CreatedOn":new Date() 
+      
     }
+    this.data.push(this.questions);
   }
   quizId:string="";
   quizComments:string="";
@@ -57,21 +69,21 @@ this.quizId=id;
 this.quizComments="";
 this.getComment(id);
   }
-  saveComments(){
-    if(this.quizComments=="")
-    return;
-    var data={
-"user":"admin",
-"comment":this.quizComments,
-"questionId":this.quizId,
-    };
-    this.firebaseService.createComment(data)
-    .then(
-      res => {
-      alert("comments added")
-      }
-    )
-  }
+//   saveComments(){
+//     if(this.quizComments=="")
+//     return;
+//     var data={
+// "user":"admin",
+// "comment":this.quizComments,
+// "questionId":this.quizId,
+//     };
+//     this.firebaseService.createComment(data)
+//     .then(
+//       res => {
+//       alert("comments added")
+//       }
+//     )
+//   }
 
 getData(){
   
@@ -89,14 +101,7 @@ getData(){
     
     })    
   }
-  resetFields(){
-   
-    this.exampleForm = this.fb.group({
-      name: new FormControl('', Validators.required),
-      surname: new FormControl('', Validators.required),
-      age: new FormControl('', Validators.required),
-    });
-  }
+
 
   save(){
 
@@ -104,20 +109,19 @@ getData(){
     this.firebaseService.createQuestion(this.questions)
     .then(
       res => {
-       this.createForm();
+      
       }
     )
   }
-   delete(id){
-    this.firebaseService.deleteQuestion(id)
-    .then(
-      res => {
-        this.createForm();
-      },
-      err => {
-        console.log(err);
-      }
-    )
-  }
+  //  delete(id){
+  //   this.firebaseService.deleteQuestion(id)
+  //   .then(
+  //     res => {
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     }
+  //   )
+  // }
 
 }

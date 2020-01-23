@@ -10,10 +10,10 @@ import { ClassComponent } from './Master/class/class.component';
 
 
 export const rootRouterConfig: Routes = [
-  { path: '', component: ClassComponent },
+  { path: '', component: QuestionsComponent },
   { path: 'home', component: HomeComponent },
   { path: 'new-user', component: NewUserComponent },
-  { path: 'new', component: QuestionsComponent },
+  { path: 'question', component: QuestionsComponent },
   { path: 'subject', component: SubjectComponent },
   { path: 'class', component: ClassComponent },
   { path: 'chapter', component: ChapterComponent },
