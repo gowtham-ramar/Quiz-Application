@@ -114,7 +114,7 @@ getData(){
     this.firebaseService.getQuestions('')
     .subscribe(result => {
       this.items = result;
-      this.userAnswer=[];
+     
     })    
   }
   getComment(id){
@@ -127,7 +127,6 @@ getData(){
   }
 
 getQuestion(id,modeView){
-  debugger;
   if(modeView){
     this.isViewMode=true;
     this.isUpdateMode=false;

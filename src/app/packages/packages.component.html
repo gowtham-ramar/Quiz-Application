@@ -1,7 +1,7 @@
 
 <div>
   <div class="form-group">
-    <select  (change)="getData()" [(ngModel)]="data.SubjectId">
+    <select  (change)="getData();" [(ngModel)]="data.SubjectId">
   <option value="">Select Subject</option>
   <option *ngFor="let item of subjects" value="{{item.payload.doc.id}}">{{item.payload.doc.data().SubjectName[lang]}}</option>
 </select>
@@ -21,7 +21,7 @@
  <!-- <pre>{{data|json}}</pre> -->
   </div>
 
-
+<button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Add Questions</button>
 <button (click)="saveData()"  class="btn btn-primary" *ngIf="isCreateMode">Save</button>
 <button (click)="saveData()"  class="btn btn-primary" *ngIf="isUpdateMode">Update</button>
 <button (click)="resetData()"  class="btn btn-primary">Reset</button>
@@ -38,3 +38,41 @@
 
  </div>
 </div>
+ <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Questions</h4>
+        </div>
+
+        
+        <div class="modal-body">
+   <select  (change)="getQuestion()" [(ngModel)]="ChapterId">
+  <option value="">Select Chapter</option>
+  <option *ngFor="let item of chapters" value="{{item.payload.doc.id}}">{{item.payload.doc.data().ChapterName[lang]}}</option>
+</select>
+
+   <select (change)="getQuestion()" [(ngModel)]="ClassId" >
+  <option value="">Select Class</option>
+  <option *ngFor="let item of classes" value="{{item.payload.doc.id}}">{{item.payload.doc.data().ClassName[lang]}}</option>
+</select>
+
+  <div *ngFor="let item of questions;let i = index" class="list-group-item list-group-item-action flex-column align-items-start">
+     {{item.payload.doc.data().QuestionTitle[lang]}}
+<button type="button" class="btn btn-default"(click)="questionSelection(item.payload.doc.id,item.payload.doc.data().QuestionTitle)" >Add</button>
+ </div>
+  <div *ngFor="let item of selectedQuestion;let i = index" class="list-group-item list-group-item-action flex-column align-items-start">
+{{item.title[lang]}}
+ </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"(click)="savQuestion()" >Add</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

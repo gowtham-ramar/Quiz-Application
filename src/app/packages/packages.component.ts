@@ -11,6 +11,10 @@ export class PackageComponent implements OnInit {
 
 items: Array<any>;
 subjects: Array<any>;
+classes: Array<any>;
+chapters: Array<any>;
+selectedQuestion: Array<any>;
+confirmQuestion:any= [];
 item: any;
 lang:string='en';
 isViewMode:boolean=false;
@@ -29,7 +33,17 @@ data :any;
     this.firebaseService.getSubjects()
     .subscribe(result => {
       this.subjects = result;
-    });      
+    });     
+      this.firebaseService.getClasss()
+    .subscribe(result => {
+      this.classes = result;
+    });       
+  }
+    getChapter(){
+this.firebaseService.getChapters(this.data.SubjectId)
+    .subscribe(result => {
+      this.chapters = result;
+    });    
   }
   resetData(){
    this.data= {
@@ -52,7 +66,7 @@ data :any;
     this.isCreateMode=true;
     this.isUpdateMode=false;
     this.isViewMode=false;
-   this.getData();
+  
   }
 getData(){  
     this.firebaseService.getPackages(this.data.SubjectId)
@@ -116,7 +130,10 @@ getData(){
       }
     });    
   }
-
+questionSelection(id,title){
+this.selectedQuestion.push({id:id,title:title});
+this.confirmQuestion.push(id);
+}
 }
 
 
