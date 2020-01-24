@@ -14,7 +14,7 @@ questions: Array<any>;
 subjects: Array<any>;
 classes: Array<any>;
 chapters: Array<any>;
-selectedQuestion: Array<any>;
+selectedQuestion: Array<any>; 
 confirmQuestion:any= [];
 item: any;
 lang:string='en';

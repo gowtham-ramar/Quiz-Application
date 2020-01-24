@@ -24,6 +24,10 @@ import { SubjectComponent } from './Master/subject/subject.component';
 import { ChapterComponent } from './Master/chapter/chapter.component';
 import { ClassComponent } from './Master/class/class.component';
 import { PackageComponent } from './packages/packages.component';
+import { PackageListComponent } from './frontend/package-list/package-list.component';
+import { QuizComponent } from './frontend/quiz/quiz.component';
+import { SummaryComponent } from './frontend/summary/summary.component';
+import { QuizResolver } from './frontend/quiz/quiz.resolver';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,10 @@ import { PackageComponent } from './packages/packages.component';
     SubjectComponent,
     ChapterComponent,
     ClassComponent,
-    PackageComponent
+    PackageComponent,
+    PackageListComponent,
+    QuizComponent,
+    SummaryComponent
   ],
   entryComponents: [AvatarDialogComponent],
   imports: [
@@ -52,7 +59,7 @@ import { PackageComponent } from './packages/packages.component';
     MatSliderModule,
     MatDialogModule
   ],
-  providers: [FirebaseService, EditUserResolver],
+  providers: [FirebaseService, EditUserResolver, QuizResolver],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

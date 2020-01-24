@@ -55,6 +55,9 @@ export class FirebaseService {
    getQuestions(value){
     return this.db.collection('questions').snapshotChanges();
   }
+     getQuestionsById (value){
+    return this.db.collection('questions',ref=>ref.where("QuestionId")).snapshotChanges();
+  }
     getQuestion(key){
     return this.db.collection('questions').doc(key).snapshotChanges();
   }
