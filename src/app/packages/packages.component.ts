@@ -34,9 +34,17 @@ data :any;
   resetData(){
    this.data= {
       "PackageName":{"en":"","ta":""},
-	  "SubjectId":"",
+	    "SubjectId":"",
       "Image":"",
       "displayOrder":0,
+      "isFree":true,
+      "Amount":0,
+      "NumberOfQuestion":0,
+      "TotalMark":0,
+      "EachQuestion":0,
+      "NegativeMarkEachQuestion":0,
+      "Offer":"",
+      "QuestionId":[],
       "Description":{"en":"","ta":""},
       "CreatedBy":"",
       "CreatedOn":""

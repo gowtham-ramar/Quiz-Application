@@ -146,8 +146,8 @@ createSubject(value){
   createPackage(value){
     return this.db.collection('packages').add(value);
   }
-   getPackages(){
-    return this.db.collection('packages',ref=>ref.where('Status','==','live')).snapshotChanges();
+   getPackages(id){
+    return this.db.collection('packages',ref=>ref.where('SubjectId','==',id).where('Status','==','live')).snapshotChanges();
     //.orderBy('displayOrder')
   }
      getPackage(key){

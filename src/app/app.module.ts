@@ -36,7 +36,7 @@ import { PackageComponent } from './packages/packages.component';
     SubjectComponent,
     ChapterComponent,
     ClassComponent,
-    PackagesComponent
+    PackageComponent
   ],
   entryComponents: [AvatarDialogComponent],
   imports: [
