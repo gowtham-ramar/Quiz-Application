@@ -17,8 +17,7 @@ export class AvatarDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    debugger;
-
+    
     this.getData();
   }
 

@@ -52,7 +52,7 @@ this.firebaseService.getChapters(this.SubjectId)
     });    
   }
   addOptions(idx){
-    alert(this.data[idx])
+    
     this.data[idx].Options.push({
         "OptionsTitle":{"en":"","ta":""}
       });
@@ -189,5 +189,7 @@ this.isUpdateMode=false;
       }
     )
   }
+  
+
 
 }

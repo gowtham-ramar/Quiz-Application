@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class QuizComponent implements OnInit {
 item:any;
 questions:any;
+lang:string='en';
 id:string="";
   constructor(
     public firebaseService: FirebaseService,

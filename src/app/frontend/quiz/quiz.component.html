@@ -1,6 +1,11 @@
-<p>
-quiz works!
-{{item | json}}
+<div *ngFor="let item of questions;let i = index" class="list-group-item list-group-item-action flex-column align-items-start">
+ 
 
-{{questions | json}}
-</p>
+
+<br>
+ {{item.payload.doc.data().QuestionTitle[lang]}}
+ <br/>
+
+
+
+ </div>

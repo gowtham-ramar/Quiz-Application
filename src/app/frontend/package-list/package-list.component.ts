@@ -37,7 +37,7 @@ getData(){
     });    
   }
   viewData(id){
-    alert("tes")
+    
  this.router.navigate(['/quiz/'+id]);
   }
 

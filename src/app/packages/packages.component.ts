@@ -94,7 +94,8 @@ getQuestion(){
     this.firebaseService.createPackage(this.data)
     .then(
       res => {
-       this.resetData();
+        this.updateQuestionId(0);
+       //this.resetData();
       }
     )
     }else{
@@ -154,6 +155,22 @@ this.confirmQuestion.push(id);
 savQuestion(){
   this.data.QuestionId=this.confirmQuestion;
 }
+updateQuestionId(idx){
+  
+    if(this.confirmQuestion.length>0 && this.confirmQuestion.length>idx)
+{
+    this.firebaseService.updateQuestionId(this.confirmQuestion[idx])
+    .then(
+      res => {
+      idx=idx+1;
+      this.updateQuestionId(idx);
+      }
+    )
+   
+  }else{
+    this.resetData();
+  }
+  }
 }
 
 

@@ -56,7 +56,7 @@ export class FirebaseService {
     return this.db.collection('questions').snapshotChanges();
   }
      getQuestionsById (value){
-    return this.db.collection('questions',ref=>ref.where("QuestionId")).snapshotChanges();
+    return this.db.collection('questions',ref=>ref.where("QuestionId",'in',value)).snapshotChanges();
   }
     getQuestion(key){
     return this.db.collection('questions').doc(key).snapshotChanges();
@@ -166,5 +166,7 @@ createSubject(value){
     statusUpdatePackage(key,status){
     return this.db.collection('packages').doc(key).update({"Status":status});
   }
-
+ updateQuestionId(key){
+    return this.db.collection('questions').doc(key).update({"QuestionId":key});
+  }
 }
