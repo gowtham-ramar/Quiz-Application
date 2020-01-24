@@ -23,7 +23,7 @@ import { QuestionsComponent } from './questions/questions.component';
 import { SubjectComponent } from './Master/subject/subject.component';
 import { ChapterComponent } from './Master/chapter/chapter.component';
 import { ClassComponent } from './Master/class/class.component';
-import { PackagesComponent } from './packages/packages.component';
+import { PackageComponent } from './packages/packages.component';
 
 @NgModule({
   declarations: [
