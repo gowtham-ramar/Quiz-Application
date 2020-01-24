@@ -143,4 +143,25 @@ createSubject(value){
     return this.db.collection('classes').doc(key).update({"Status":status});
   }
 
+  createPackage(value){
+    return this.db.collection('packages').add(value);
+  }
+   getPackages(){
+    return this.db.collection('packages',ref=>ref.where('Status','==','live')).snapshotChanges();
+    //.orderBy('displayOrder')
+  }
+     getPackage(key){
+    return this.db.collection('packages').doc(key).snapshotChanges();
+  }
+   updatePackage(Key, value){
+    return this.db.collection('packages').doc(Key).set(value);
+  }
+
+  deletePackage(Key){
+    return this.db.collection('packages').doc(Key).delete();
+  }
+    statusUpdatePackage(key,status){
+    return this.db.collection('packages').doc(key).update({"Status":status});
+  }
+
 }

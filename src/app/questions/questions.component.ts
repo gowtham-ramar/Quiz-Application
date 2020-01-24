@@ -173,11 +173,12 @@ if(this.data.length>0 && this.data.length>idx)
       }
     )
    }
-}
+}else{
 this.getData();
 this.data=[];
 this.isCreateMode=false;
 this.isUpdateMode=false;
+}
   }
    delete(id){
     this.firebaseService.deleteQuestion(id)
