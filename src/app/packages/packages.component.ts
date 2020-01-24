@@ -10,6 +10,7 @@ import { FirebaseService } from '../services/firebase.service';
 export class PackageComponent implements OnInit {
 
 items: Array<any>;
+questions: Array<any>;
 subjects: Array<any>;
 classes: Array<any>;
 chapters: Array<any>;
@@ -20,6 +21,8 @@ lang:string='en';
 isViewMode:boolean=false;
 isUpdateMode:boolean=false;
 isCreateMode:boolean=false;
+ChapterId:string="";
+ClassId:string="";
 id:string="";
 data :any;
   constructor(
@@ -75,6 +78,14 @@ getData(){
     });    
   }
 
+getQuestion(){
+  
+    this.firebaseService.getQuestions('')
+    .subscribe(result => {
+      this.questions = result;
+     
+    })    
+  }
   saveData(){
     if(this.isCreateMode){
      this.data.CreatedBy='admin';
@@ -131,8 +142,17 @@ getData(){
     });    
   }
 questionSelection(id,title){
+  if(typeof(this.selectedQuestion)=="undefined"){
+this.selectedQuestion=[];    
+  }
+  if(typeof(this.confirmQuestion)=="undefined"){
+this.confirmQuestion=[];    
+  }
 this.selectedQuestion.push({id:id,title:title});
 this.confirmQuestion.push(id);
+}
+savQuestion(){
+  this.data.QuestionId=this.confirmQuestion;
 }
 }
 

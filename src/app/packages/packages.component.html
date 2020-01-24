@@ -1,7 +1,7 @@
 
 <div>
   <div class="form-group">
-    <select  (change)="getData();" [(ngModel)]="data.SubjectId">
+    <select  (change)="getData();getChapter();" [(ngModel)]="data.SubjectId">
   <option value="">Select Subject</option>
   <option *ngFor="let item of subjects" value="{{item.payload.doc.id}}">{{item.payload.doc.data().SubjectName[lang]}}</option>
 </select>
@@ -21,7 +21,7 @@
  <!-- <pre>{{data|json}}</pre> -->
   </div>
 
-<button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Add Questions</button>
+<button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Add Questions - {{confirmQuestion.length}}</button>
 <button (click)="saveData()"  class="btn btn-primary" *ngIf="isCreateMode">Save</button>
 <button (click)="saveData()"  class="btn btn-primary" *ngIf="isUpdateMode">Update</button>
 <button (click)="resetData()"  class="btn btn-primary">Reset</button>
