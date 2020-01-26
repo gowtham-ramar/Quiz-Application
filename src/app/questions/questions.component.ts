@@ -165,7 +165,7 @@ if(this.data.length>0 && this.data.length>idx)
    }else{
       this.data[idx].UpdatedBy='admin';
       this.data[idx].UpdatedOn=new Date();
-       this.firebaseService.updateChapter(this.id,this.data[idx])
+       this.firebaseService.updateQuestion(this.id,this.data[idx])
     .then(
       res => {
        
