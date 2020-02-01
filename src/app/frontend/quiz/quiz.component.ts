@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class QuizComponent implements OnInit {
 item:any;
-questions:any;
+questions:any=[];
 lang:string='en';
 id:string="";
   constructor(
@@ -35,12 +35,35 @@ id:string="";
     })
   }
   startQuizIdx:number=0;
+  userNavigation:any=[];
 getQuestions(ids){
   
    this.firebaseService.getQuestionsById(ids)
     .subscribe(result => {
       this.questions = result;
     this.startQuizIdx=0;
+    this.userNavigation=[];
+    this.questions.forEach((item, index)=>{
+     
+      this.userNavigation.push({idx:index,color:''});
+    });
     })    
+}
+optionSelect(idx){
+  this.navigation(idx,'btn-info');
+}
+navigation(idx,color){
+  this.startQuizIdx=idx;
+  if(this.userNavigation[idx].color=='' && color=='btn-warning'){
+      this.userNavigation[idx].color=color;      
+  }else {
+      this.userNavigation[idx].color=color;      
+  }
+}
+previewQuestion(){
+this.startQuizIdx-=1;
+}
+nextQuestion(){
+this.startQuizIdx+=1;
 }
 }

@@ -1,3 +1,9 @@
 <div *ngIf="questions.length>0" class="list-group-item list-group-item-action flex-column align-items-start">
  {{questions[startQuizIdx].QuestionTitle[lang]}}
  </div>
+
+ <div *ngFor="let nav of userNavigation">
+   <button class="btn {{nav.color}}" (click)="navigation(nav.idx,'btn-warning')"> {{nav.idx+1}}</button>
+ </div>
+<button class="btn btn-info" (click)="previewQuestion()" *ngIf='startQuizIdx>0'> Previous</button>
+ <button class="btn btn-info" (click)="nextQuestion()" *ngIf='startQuizIdx<questions.length-1'> Next</button>
