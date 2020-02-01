@@ -49,10 +49,10 @@ getQuestions(ids){
      
       this.userNavigation.push({idx:index,color:'',time:0});
     });
-       interval(1000).subscribe((res) =>{
-       this.userNavigation[this.startQuizIdx].time += 1;
-       this.totalTime+=1;
-    });
+    //    interval(1000).subscribe((res) =>{
+    //    this.userNavigation[this.startQuizIdx].time += 1;
+    //    this.totalTime+=1;
+    // });
     })    
 }
 optionSelect(idx){
