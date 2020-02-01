@@ -34,11 +34,13 @@ id:string="";
       }
     })
   }
+  startQuizIdx:number=0;
 getQuestions(ids){
+  
    this.firebaseService.getQuestionsById(ids)
     .subscribe(result => {
       this.questions = result;
-     
+    this.startQuizIdx=0;
     })    
 }
 }

@@ -1,11 +1,3 @@
-<div *ngFor="let item of questions;let i = index" class="list-group-item list-group-item-action flex-column align-items-start">
- 
-
-
-<br>
- {{item.payload.doc.data().QuestionTitle[lang]}}
- <br/>
-
-
-
+<div *ngIf="questions.length>0" class="list-group-item list-group-item-action flex-column align-items-start">
+ {{questions[startQuizIdx].QuestionTitle[lang]}}
  </div>

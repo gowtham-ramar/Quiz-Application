@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { map, switchMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -56,7 +56,16 @@ export class FirebaseService {
     return this.db.collection('questions').snapshotChanges();
   }
      getQuestionsById (value){
-    return this.db.collection('questions',ref=>ref.where("QuestionId",'in',value)).snapshotChanges();
+      //  ,ref=>ref.where("QuestionId",'in',value)
+    return this.db.collection('questions').snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data: Object = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );;
   }
     getQuestion(key){
     return this.db.collection('questions').doc(key).snapshotChanges();
