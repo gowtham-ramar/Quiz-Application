@@ -15,7 +15,7 @@ import { QuizResolver } from './frontend/quiz/quiz.resolver';
 import { SummaryComponent } from './frontend/summary/summary.component';
 
 export const rootRouterConfig: Routes = [
-  { path: '', component: ClassComponent },
+  { path: '', component: PackageListComponent },
   { path: 'home', component: HomeComponent },
   { path: 'new-user', component: NewUserComponent },
   { path: 'question', component: QuestionsComponent },
