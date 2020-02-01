@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-
+import {  interval } from 'rxjs';
 
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
@@ -36,6 +36,7 @@ id:string="";
   }
   startQuizIdx:number=0;
   userNavigation:any=[];
+  totalTime:number=0;
 getQuestions(ids){
   
    this.firebaseService.getQuestionsById(ids)
@@ -43,9 +44,14 @@ getQuestions(ids){
       this.questions = result;
     this.startQuizIdx=0;
     this.userNavigation=[];
+   
     this.questions.forEach((item, index)=>{
      
-      this.userNavigation.push({idx:index,color:''});
+      this.userNavigation.push({idx:index,color:'',time:0});
+    });
+       interval(1000).subscribe((res) =>{
+       this.userNavigation[this.startQuizIdx].time += 1;
+       this.totalTime+=1;
     });
     })    
 }
