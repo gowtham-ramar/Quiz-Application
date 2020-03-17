@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { map, switchMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
-  constructor(public db: AngularFirestore) {}
+  constructor(public db: AngularFirestore
+  ,public dba:AngularFireDatabase) {}
 
+getTest(){
+     
+  }
   getAvatars(){
       return this.db.collection('/avatar').valueChanges()
   }
